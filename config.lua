@@ -7,44 +7,36 @@ WEAPONS_EXAMPLE = {
 
 Restricted = {
     ['vehicles'] = {
-        ['admin'] = {
-            -- restricted to nothing
+        ['admin'] = { -- vehicles only admins can use
+            'admincar2',
         },
-        ['moderator'] = {
-            'admincar' -- restricted to the admin's vehicle
-        },
-        -- everyone else's restrictions
-        ['everyone'] = {
-            'charger'
-        }
+        ['moderator'] = { -- vehicles only moderators (and above) can use
+            'admincar1',
+        }, -- vehicles that are locked for everyone
+        'stockade3',
     },
     
     ['peds'] = {
-        ['admin'] = {
-            -- restricted to nothing
+        ['admin'] = { -- peds only admins can use
+            'adminped',
         },
-        ['moderator'] = {
-            'admincar' -- restricted to the admin's vehicle
-        },
-        -- equivalent to ['everyone'] = { 'mp_f_stripperlite', 'adminped' }
+        ['moderator'] = { -- peds only moderators (and above) can use
+            'modped',
+        }, -- peds that are locked for everyone
         'mp_f_stripperlite',
-        'adminped'
     },
     
     ['weapons'] = {
-        ['admin'] = {}, -- you have to include an empty array if you want to restrict nothing
-        ['moderator'] = {
+        ['customAce'] = {}, -- weapons only customAce can use
+        ['moderator'] = { -- weapons only moderators (and above) can use
             'weapon_railgun',
             'weapon_rayminigun',
             'weapon_raycarbine',
             'weapon_raypistol',
-        },
-        -- 'everyone' will also inherit 'weapon_railgun', 'weapon_rayminigun', etc from the 'moderator' ace
-        ['everyone'] = {
-            'weapon_railgun',
-            'weapon_nightstick'
-        }
-    }
+        }, -- weapons no-one can use
+        'weapon_minigun',
+        'weapon_snowball',
+    },
 }
 
 -- Banned weapon ammunition types. Only valid for Mk II weapons. See ammotypes.lua
