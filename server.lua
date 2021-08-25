@@ -3,11 +3,11 @@ local Categories = { 'vehicles', 'peds', 'weapons' }
 
 -- build restrictions
 for _, category in ipairs(Categories) do
-    local restriction = { ['everyone'] = {} }
+    local restriction = { ['locked'] = {} }
     for ace, bl in pairs(Restricted[category]) do
         if not bl then
             for _, v in ipairs(ace) do
-                restriction.everyone[v] = true
+                restriction.locked[v] = true
             end
         else
             if not restriction[ace] then
