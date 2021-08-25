@@ -21,4 +21,5 @@ $ git clone https://github.com/MrGriefs/dynamicblacklist.git
 
 ## Documentation
 
-Each ace permission has it's own category, i.e. `dblacklist.admin.vehicles` can be used to allow admin vehicles and moderator vehicles but not admin weapons, peds or moderator weapons or peds.
+Each ace permission has it's own category, i.e. `dblacklist.admin.vehicles` can be used to allow admin vehicles and moderator vehicles but not admin weapons, peds or moderator weapons or peds.  
+If you need an ace to have multiple inhertiances, the `Inherits` table supports that. Just add `['parentAce'] = 'childAce'`.
