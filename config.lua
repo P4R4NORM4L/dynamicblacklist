@@ -7,33 +7,37 @@ WEAPONS_EXAMPLE = {
 
 Restricted = {
     ['vehicles'] = {
-        ['admin'] = { -- vehicles only admins can use
+        -- vehicles that are locked for everyone (including admins)
+        'stockade3',
+        -- vehicles only admins can use
+        ['admin'] = {
             'admincar2',
         },
-        ['moderator'] = { -- vehicles only moderators (and above) can use
+        -- vehicles only moderators (and above) can use
+        ['moderator'] = {
             'admincar1',
-        }, -- vehicles that are locked for everyone
-        'stockade3',
+        },
     },
     
     ['peds'] = {
-        ['admin'] = { -- peds only admins can use
+        ['admin'] = {
             'adminped',
         },
-        ['moderator'] = { -- peds only moderators (and above) can use
+        ['moderator'] = {
             'modped',
-        }, -- peds that are locked for everyone
+        },
         'mp_f_stripperlite',
     },
     
     ['weapons'] = {
-        ['customAce'] = {}, -- weapons only customAce can use
-        ['moderator'] = { -- weapons only moderators (and above) can use
+        -- You can also define your own ace permission
+        ['customAce'] = {},
+        ['moderator'] = {
             'weapon_railgun',
             'weapon_rayminigun',
             'weapon_raycarbine',
             'weapon_raypistol',
-        }, -- weapons no-one can use
+        },
         'weapon_minigun',
         'weapon_snowball',
     },
@@ -49,17 +53,19 @@ WeaponAmmoBannedTypes = {}
 
 -- You can modify the ace prefix here
 Prefix = 'dblacklist'
+
 -- If your server uses a vehicle spawner/menu, enable this to
 -- automatically delete blacklisted vehicles a player spawns
 VehicleNoSpawn = true
+
 -- Whether the vehicle blacklist only kicks them from
 -- the vehicle if they're in the driver's seat
--- Set to false if you want the player to be affected no matter the seat
 VehicleDriverBlacklist = true
-Inherits = { -- Automatically inherit whitelist from x.
-             -- You can do this manually by adding 'add_ace dblacklist.admin dblacklist.moderator allow' etc for each ace
-    ['admin'] = 'moderator', -- admin inherits moderator whitelist
-    ['moderator'] = 'everyone' -- moderator inherits everyone whitelist
+
+Inherits = { -- The order to inherit from. You can also do this manually by adding 'add_ace dblacklist.admin dblacklist.moderator allow' etc for each ace
+    'customAce',
+    'admin',
+    'moderator',
 }
 
 -- Once done configuring, add 'add_ace group.admin dblacklist.admin'
