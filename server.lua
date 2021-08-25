@@ -20,8 +20,16 @@ for _, category in ipairs(Categories) do
         end
     end
     -- setup inheritance
+    local lastAce
     for parent, child in pairs(Inherits) do
-        ExecuteCommand('add_ace ' .. Prefix .. '.' .. parent .. '.' .. category .. ' ' .. Prefix .. '.' .. child .. '.' .. category .. ' allow')
+        if type(parent) == 'number' then
+            if lastAce then
+                ExecuteCommand('add_ace ' .. Prefix .. '.' .. lastAce .. '.' .. category .. ' ' .. Prefix .. '.' .. child .. '.' .. category .. ' allow')
+            end
+            lastAce = child
+        else
+            ExecuteCommand('add_ace ' .. Prefix .. '.' .. parent .. '.' .. category .. ' ' .. Prefix .. '.' .. child .. '.' .. category .. ' allow')
+        end
     end
     restrictions[category] = restriction
 end
