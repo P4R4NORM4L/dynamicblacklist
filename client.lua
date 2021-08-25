@@ -31,11 +31,13 @@ Citizen.CreateThread(function()
         else
             veh = GetVehiclePedIsTryingToEnter(ped)
         end
-        if veh and (not VehicleDriverBlacklist or DoesEntityExist(veh)) then
+        if veh and DoesEntityExist(veh) then
             local hash = GetEntityModel(veh)
             local driver = GetPedInVehicleSeat(veh, -1)
-            if driver == ped then
-                if ClientBlacklist.vehicles[hash] then
+            if not VehicleDriverBlacklist or driver == ped then
+                local confirm = ClientBlacklist.vehicles[hash]
+                if Inverted then confirm = not confirm end
+                if confirm then
                     DeleteEntity(veh)
                     ClearPedTasksImmediately(ped)
                     ShowNotification("~y~Hey!~s~ This is ~r~not your vehicle~s~!")
@@ -51,8 +53,9 @@ Citizen.CreateThread(function()
         Citizen.Wait(5000)
         local ped = GetPlayerPed(-1)
         local hash = GetEntityModel(ped)
-        print(hash)
-        if ClientBlacklist.peds[hash] then
+        local confirm = ClientBlacklist.peds[hash]
+        if Inverted then confirm = not confirm end
+        if confirm then
             RequestModel(ClientLastModel)
             while not HasModelLoaded(ClientLastModel) do
                 Citizen.Wait(400)
@@ -71,7 +74,9 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(1000)
         local _, hash = GetCurrentPedWeapon(ped, true)
-        if ClientBlacklist.weapons[hash] or WeaponAmmoBannedTypes[GetPedAmmoTypeFromWeapon(ped, hash)] then
+        local confirm = ClientBlacklist.weapons[hash] or WeaponAmmoBannedTypes[GetPedAmmoTypeFromWeapon(ped, hash)]
+        if Inverted then confirm = not confirm end
+        if confirm then
             RemoveWeaponFromPed(ped, hash)
             ShowNotification("~y~Hey!~s~ You're ~r~not allowed~s~ to have this weapon!")
         end
